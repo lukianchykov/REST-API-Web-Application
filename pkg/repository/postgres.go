@@ -5,6 +5,18 @@ import (
 	"github.com/jmoiron/sqlx"
 )
 
+/**
+ * Postgres db initialization
+ */
+
+const (
+	usersTable      = "users"
+	todoListsTable  = "todo_lists"
+	usersListsTable = "users_lists"
+	todoItemsTable  = "todo_items"
+	listsItemsTable = "lists_item"
+)
+
 type Config struct {
 	Host     string
 	Port     string

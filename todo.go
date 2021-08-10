@@ -1,5 +1,9 @@
 package todo
 
+/**
+ * Todo Model
+ */
+
 type TodoList struct {
 	Id          int    `json:"id"`
 	Title       string `json:"title"`

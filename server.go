@@ -6,6 +6,10 @@ import (
 	"time"
 )
 
+/**
+ * Server initialization
+ */
+
 type Server struct {
 	httpServer *http.Server
 }

@@ -2,6 +2,10 @@ package handler
 
 import "github.com/gin-gonic/gin"
 
+/**
+ * Lists handler
+ */
+
 func (h *Handler) createList(c *gin.Context) {
 
 }

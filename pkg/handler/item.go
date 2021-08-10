@@ -1,5 +1,9 @@
 package handler
 
+/**
+ * Items handler
+ */
+
 import "github.com/gin-gonic/gin"
 
 func (h *Handler) createItems(c *gin.Context) {

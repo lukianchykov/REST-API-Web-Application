@@ -5,6 +5,10 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+/**
+ * Main Server Handler
+ */
+
 type Handler struct {
 	services *service.Service
 }
