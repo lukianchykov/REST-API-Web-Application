@@ -16,6 +16,7 @@ func (h *Handler) signUp(c *gin.Context) {
 	// HTTP 400 - Incorrect data in http.request
 	if err := c.BindJSON(&input); err != nil {
 		newErrorResponse(c, http.StatusBadRequest, err.Error())
+		return
 	}
 
 	id, err := h.services.Authorization.CreateUser(input)
@@ -23,6 +24,7 @@ func (h *Handler) signUp(c *gin.Context) {
 	// HTTP 500 - Internal server error
 	if err != nil {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
 	}
 
 	// HTTP 200 - Successfully
@@ -31,6 +33,30 @@ func (h *Handler) signUp(c *gin.Context) {
 	})
 }
 
-func (h *Handler) signIn(c *gin.Context) {
+type signInInput struct {
+	Username string `json:"username" binding:"required"`
+	Password string `json:"password" binding:"required"`
+}
 
+func (h *Handler) signIn(c *gin.Context) {
+	var input signInInput
+
+	// HTTP 400 - Incorrect data in http.request
+	if err := c.BindJSON(&input); err != nil {
+		newErrorResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
+
+	token, err := h.services.Authorization.GenerateToken(input.Username, input.Password)
+
+	// HTTP 500 - Internal server error
+	if err != nil {
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	// HTTP 200 - Successfully
+	c.JSON(http.StatusOK, map[string]interface{}{
+		"token": token,
+	})
 }
