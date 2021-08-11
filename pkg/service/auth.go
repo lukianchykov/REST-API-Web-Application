@@ -11,7 +11,7 @@ import (
 )
 
 /**
- * Authorization service
+ * Authorization & Authentication service
  */
 
 const (
@@ -42,7 +42,7 @@ func (s *AuthService) GenerateToken(username, password string) (string, error) {
 	// get users from db
 	user, err := s.repo.GetUser(username, generatePasswordHash(password))
 	if err != nil {
-		return "", err
+		return "Can`t get User from db", err
 	}
 
 	authToken := jwt.NewWithClaims(jwt.SigningMethodHS256, &tokenClaims{
@@ -57,7 +57,7 @@ func (s *AuthService) GenerateToken(username, password string) (string, error) {
 }
 
 func (s *AuthService) ParseToken(accessToken string) (int, error) {
-	token, err := jwt.ParseWithClaims(accessToken, &tokenClaims{}, func(token *jwt.Token) (interface{}, error) {
+	authToken, err := jwt.ParseWithClaims(accessToken, &tokenClaims{}, func(token *jwt.Token) (interface{}, error) {
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
 			return nil, errors.New("invalid signing method")
 		}
@@ -68,9 +68,9 @@ func (s *AuthService) ParseToken(accessToken string) (int, error) {
 		return 0, err
 	}
 
-	claims, ok := token.Claims.(*tokenClaims)
+	claims, ok := authToken.Claims.(*tokenClaims)
 	if !ok {
-		return 0, errors.New("token claims are not of type *tokenClaims")
+		return 0, errors.New("authorization token claims are not of type *tokenClaims")
 	}
 
 	return claims.UserId, nil

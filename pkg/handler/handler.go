@@ -6,7 +6,7 @@ import (
 )
 
 /**
- * Main Server Handler
+ * Class represents Routes on Server
  */
 
 type Handler struct {

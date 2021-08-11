@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"errors"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"strings"
@@ -11,17 +12,22 @@ const (
 	userCtx             = "userId"
 )
 
+/**
+ * Middleware projection for api HTTP group
+ */
+
 func (h *Handler) userIdentity(c *gin.Context) {
 	header := c.GetHeader(authorizationHeader)
+
 	// HTTP 401 - User isn`t authorized. Need authentication
 	if header == "" {
-		newErrorResponse(c, http.StatusUnauthorized, "empty auth header")
+		newErrorResponse(c, http.StatusUnauthorized, "empty authorization header")
 		return
 	}
 	// HTTP 401 - User isn`t authorized. Need authentication
 	headerParts := strings.Split(header, " ")
 	if len(headerParts) != 2 {
-		newErrorResponse(c, http.StatusUnauthorized, "invalid auth header")
+		newErrorResponse(c, http.StatusUnauthorized, "invalid authorization header")
 		return
 	}
 
@@ -35,4 +41,22 @@ func (h *Handler) userIdentity(c *gin.Context) {
 
 	c.Set(userCtx, userId)
 
+}
+
+func getUserId(c *gin.Context) (int, error) {
+	id, ok := c.Get(userCtx)
+	// HTTP 404 - User not found
+	if !ok {
+		newErrorResponse(c, http.StatusNotFound, "user id not found")
+		return 0, errors.New("user id not found")
+	}
+
+	idInt, ok := id.(int)
+	// HTTP 404 - User not found
+	if !ok {
+		newErrorResponse(c, http.StatusNotFound, "user id is of invalid type")
+		return 0, errors.New("user id not found")
+	}
+
+	return idInt, nil
 }
