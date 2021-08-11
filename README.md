@@ -1,6 +1,6 @@
 # REST API Web Application для менеджемента списка дел (TODO list) на Go
 
-## В этом приложении использовались следующие технологии:
+## Technologies:
 - <b> REST API Architecture</b>
 - <b> Gin FrameWork</b>
 - <b> Postgresql</b> 
@@ -12,7 +12,7 @@
 
 ### Для запуска приложения:
 
-- Необходимо запустить контейнер докера с <b>database</b> https://hub.docker.com/repository/docker/mandarin4ek/webapp
+- Необходимо запустить <b>Docker container</b> с <b>database</b> https://hub.docker.com/repository/docker/mandarin4ek/webapp
 - Версия: <b>postgresFinalVersion</b>
 - Запустить сам проект
 
