@@ -85,9 +85,57 @@ func (h *Handler) getListById(c *gin.Context) {
 }
 
 func (h *Handler) updateList(c *gin.Context) {
+	userId, err := getUserId(c)
+	if err != nil {
+		return
+	}
 
+	id, err := strconv.Atoi(c.Param("id"))
+	// HTTP 400 - Incorrect data in http.request
+	if err != nil {
+		newErrorResponse(c, http.StatusBadRequest, "invalid id param")
+		return
+	}
+
+	var input todo.UpdateListInput
+	// HTTP 400 - Incorrect data in http.request
+	if err := c.BindJSON(&input); err != nil {
+		newErrorResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
+
+	// HTTP 503 - Service is unavailable
+	if err := h.services.Update(userId, id, input); err != nil {
+		newErrorResponse(c, http.StatusServiceUnavailable, err.Error())
+		return
+	}
+
+	// HTTP 200 - Successfully
+	c.JSON(http.StatusOK, statusResponse{"ok"})
 }
 
 func (h *Handler) deleteList(c *gin.Context) {
+	userId, err := getUserId(c)
+	if err != nil {
+		return
+	}
 
+	id, err := strconv.Atoi(c.Param("id"))
+	// HTTP 400 - Incorrect data in http.request
+	if err != nil {
+		newErrorResponse(c, http.StatusBadRequest, "invalid id param")
+		return
+	}
+
+	err = h.services.TodoList.Delete(userId, id)
+	// HTTP 503 - Service is unavailable
+	if err != nil {
+		newErrorResponse(c, http.StatusServiceUnavailable, err.Error())
+		return
+	}
+
+	// HTTP 200 - Successfully
+	c.JSON(http.StatusOK, statusResponse{
+		Status: "ok",
+	})
 }
