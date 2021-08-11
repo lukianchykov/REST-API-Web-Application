@@ -105,7 +105,7 @@ func (h *Handler) updateList(c *gin.Context) {
 	}
 
 	// HTTP 503 - Service is unavailable
-	if err := h.services.Update(userId, id, input); err != nil {
+	if err := h.services.TodoList.Update(userId, id, input); err != nil {
 		newErrorResponse(c, http.StatusServiceUnavailable, err.Error())
 		return
 	}
