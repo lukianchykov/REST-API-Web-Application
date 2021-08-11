@@ -13,7 +13,7 @@
 ### Для запуска приложения:
 
 - Необходимо запустить <b>Docker container</b> с <b>database</b> https://hub.docker.com/repository/docker/mandarin4ek/webapp
-- Версия: <b>postgresFinalVersion</b>
+- Версия: <b>postgresv1.0</b>
 - Запустить сам проект
 
 ### В случаи пустой базы данных, необходимо сделать миграцию:
