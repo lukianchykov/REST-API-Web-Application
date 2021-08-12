@@ -16,7 +16,7 @@ func (h *Handler) signUp(c *gin.Context) {
 
 	// HTTP 400 - Incorrect data in http.request
 	if err := c.BindJSON(&input); err != nil {
-		newErrorResponse(c, http.StatusBadRequest, err.Error())
+		newErrorResponse(c, http.StatusBadRequest, "invalid input body")
 		return
 	}
 
@@ -24,7 +24,7 @@ func (h *Handler) signUp(c *gin.Context) {
 
 	// HTTP 503 - Service is unavailable
 	if err != nil {
-		newErrorResponse(c, http.StatusServiceUnavailable, err.Error())
+		newErrorResponse(c, http.StatusServiceUnavailable, "something went wrong")
 		return
 	}
 

@@ -26,8 +26,13 @@ func (h *Handler) userIdentity(c *gin.Context) {
 	}
 	// HTTP 401 - User isn`t authorized. Need authentication
 	headerParts := strings.Split(header, " ")
-	if len(headerParts) != 2 {
+	if len(headerParts) != 2 || headerParts[0] != "Bearer" {
 		newErrorResponse(c, http.StatusUnauthorized, "invalid authorization header")
+		return
+	}
+
+	if len(headerParts[1]) == 0 {
+		newErrorResponse(c, http.StatusUnauthorized, "token is empty")
 		return
 	}
 
