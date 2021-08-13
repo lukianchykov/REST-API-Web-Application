@@ -3,10 +3,10 @@
 ## Technologies:
 - <b> REST API Architecture</b>
 - <b> Gin FrameWork</b>
-- <b> Postgresql</b> 
+- <b> PostgreSQL</b> 
 - <b> Migrating Database Technology</b>
 - <b> Docker</b>
-- <b> Viper configuration</b>
+- <b> Viper Configuration</b>
 - <b> Sqlx for db</b>
 - <b> JWT. Middleware</b>
 
