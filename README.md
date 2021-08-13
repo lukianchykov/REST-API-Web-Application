@@ -59,7 +59,7 @@ migrate -path ./schema -database 'mandarin4ek/webapp:postgresv1.0://postgres:roo
 ### Goland Terminal:
 ![](images/Goland2.png)
 ![](images/Goland3.png)
-##Работа приложения Postman:
+### Работа приложения Postman:
 ![](images/Postman.png)
 ![](images/Postman2.png)
 ![](images/Postman3.png)
