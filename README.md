@@ -10,17 +10,57 @@
 - <b> Sqlx for db</b>
 - <b> JWT. Middleware</b>
 
-### Для запуска приложения:
+## Tasks:
+- [x] <b> Sing-up</b>
+- [x] <b> Sing-in</b>
+- [x] <b> CreateList</b> 
+- [x] <b> GetAllLists</b>
+- [x] <b> GetListById</b>
+- [x] <b> UpdateList</b>
+- [x] <b> DeleteList</b>
+- [x] <b> CreateItem</b> 
+- [x] <b> GetAllItems</b>
+- [x] <b> GetItemById</b>
+- [x] <b> UpdateItem</b>
+- [x] <b> DeleteItem</b>
 
-- Необходимо запустить <b>Docker container</b> с <b>database</b> https://hub.docker.com/repository/docker/mandarin4ek/webapp
-- Версия: <b>postgresv1.0</b>
-- Запустить сам проект
+### First Install Postman and Docker
 
-### В случаи пустой базы данных, необходимо сделать миграцию:
+### Configure Terminal where you clone repository, like in my case:
+```
+Set-Location -Path E:\GoLangProjects\WebApplication
+```
 
-
+## Для запуска приложения:
+```
+docker-compose up web-app
+```
+### PowerShell:
+![](images/PowerShell.png)
+### Goland Terminal:
+![](images/Goland.png)
+### Docker Desktop:
+![](images/Docker1.png)
+![](images/Docker2.png)
+## В случаи пустой базы данных или первого запуска, необходимо сделать миграцию:
 ```
 migrate -path ./schema -database 'mandarin4ek/webapp:postgresv1.0://postgres:rootdocker@localhost:5436/postgres?sslmode=disable' up
 migrate -path ./schema -database 'mandarin4ek/webapp:postgresv1.0://postgres:rootdocker@localhost:5436/postgres?sslmode=disable' down
 ```
 
+### PowerShell:
+![](images/PowerShell2.png)
+![](images/PowerShell3.png)
+### Goland Terminal:
+![](images/Goland2.png)
+![](images/Goland3.png)
+##Работа приложения Postman:
+![](images/Postman.png)
+![](images/Postman2.png)
+![](images/Postman3.png)
+![](images/Postman4.png)
+![](images/Postman5.png)
+![](images/Postman6.png)
+![](images/Postman7.png)
+![](images/Postman8.png)
+![](images/Postman9.png)
