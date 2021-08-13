@@ -24,13 +24,18 @@
 - [x] <b> UpdateItem</b>
 - [x] <b> DeleteItem</b>
 
-### First Install Postman and Docker
+### First Install Postman and Docker:
+- <a href="https://www.postman.com/downloads/">Postman</a>
+- <a href="https://www.docker.com/products/docker-desktop">Docker</a>
 
-### Configure Terminal where you clone repository, like in my case:
+### Configure `Terminal` to `Project Location`:
 ```
 Set-Location -Path E:\GoLangProjects\WebApplication
 ```
-
+### PowerShell:
+![](images/PowerShellConfig.png)
+### Goland:
+![](images/GolandConfig.png)
 ## Для запуска приложения:
 ```
 docker-compose up web-app
