@@ -47,7 +47,7 @@ func (r *TodoListPostgres) GetAll(userId int) ([]todo.TodoList, error) {
 	var lists []todo.TodoList
 
 	//INNER JOIN selects the same value in both tables
-	query := fmt.Sprintf("SELECT tl.id, tl.title, tl.description, tl.update_done FROM %s tl INNER JOIN %s ul on tl.id = ul.list_id WHERE ul.user_id = $1",
+	query := fmt.Sprintf("SELECT tl.id, tl.title, tl.description FROM %s tl INNER JOIN %s ul on tl.id = ul.list_id WHERE ul.user_id = $1",
 		todoListsTable, usersListsTable)
 	err := r.db.Select(&lists, query, userId)
 
@@ -58,7 +58,7 @@ func (r *TodoListPostgres) GetById(userId, listId int) (todo.TodoList, error) {
 	var list todo.TodoList
 
 	//INNER JOIN selects the same value in both tables
-	query := fmt.Sprintf(`SELECT tl.id, tl.title, tl.description, tl.update_done FROM %s tl
+	query := fmt.Sprintf(`SELECT tl.id, tl.title, tl.description FROM %s tl
 								INNER JOIN %s ul on tl.id = ul.list_id WHERE ul.user_id = $1 AND ul.list_id = $2`,
 		todoListsTable, usersListsTable)
 	err := r.db.Get(&list, query, userId, listId)
@@ -89,11 +89,6 @@ func (r *TodoListPostgres) Update(userId, listId int, input todo.UpdateListInput
 	if input.Description != nil {
 		setValues = append(setValues, fmt.Sprintf("description=$%d", argId))
 		args = append(args, *input.Description)
-		argId++
-	}
-	if input.UpdateDone != nil {
-		setValues = append(setValues, fmt.Sprintf("update_done=$%d", argId))
-		args = append(args, *input.UpdateDone)
 		argId++
 	}
 

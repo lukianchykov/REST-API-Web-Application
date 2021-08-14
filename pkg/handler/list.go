@@ -33,9 +33,7 @@ func (h *Handler) createList(c *gin.Context) {
 
 	// HTTP 200 - Successfully
 	c.JSON(http.StatusOK, map[string]interface{}{
-		"id":          id,
-		"description": "Create List",
-		"done":        true,
+		"id": id,
 	})
 }
 
@@ -53,11 +51,7 @@ func (h *Handler) getAllLists(c *gin.Context) {
 	}
 
 	// HTTP 200 - Successfully
-	c.JSON(http.StatusOK, map[string]interface{}{
-		"data":        lists,
-		"description": "Get All Lists",
-		"done":        true,
-	})
+	c.JSON(http.StatusOK, getAllListsResponse{Data: lists})
 }
 
 func (h *Handler) getListById(c *gin.Context) {
@@ -81,11 +75,7 @@ func (h *Handler) getListById(c *gin.Context) {
 	}
 
 	// HTTP 200 - Successfully
-	c.JSON(http.StatusOK, map[string]interface{}{
-		"data":        list,
-		"description": "Get List By Id",
-		"done":        true,
-	})
+	c.JSON(http.StatusOK, list)
 }
 
 func (h *Handler) updateList(c *gin.Context) {
@@ -115,10 +105,7 @@ func (h *Handler) updateList(c *gin.Context) {
 	}
 
 	// HTTP 200 - Successfully
-	c.JSON(http.StatusOK, map[string]interface{}{
-		"description": "Update List",
-		"done":        true,
-	})
+	c.JSON(http.StatusOK, statusResponse{"Updated Successfully"})
 }
 
 func (h *Handler) deleteList(c *gin.Context) {
@@ -142,8 +129,5 @@ func (h *Handler) deleteList(c *gin.Context) {
 	}
 
 	// HTTP 200 - Successfully
-	c.JSON(http.StatusOK, map[string]interface{}{
-		"description": "Delete List",
-		"done":        true,
-	})
+	c.JSON(http.StatusOK, statusResponse{"Deleted Successfully"})
 }

@@ -40,9 +40,7 @@ func (h *Handler) createItem(c *gin.Context) {
 
 	// HTTP 200 - Successfully
 	c.JSON(http.StatusOK, map[string]interface{}{
-		"id":          id,
-		"description": "Create Item",
-		"done":        true,
+		"id": id,
 	})
 
 }
@@ -68,11 +66,7 @@ func (h *Handler) getAllItems(c *gin.Context) {
 	}
 
 	// HTTP 200 - Successfully
-	c.JSON(http.StatusOK, map[string]interface{}{
-		"data":        items,
-		"description": "Get All Items",
-		"done":        true,
-	})
+	c.JSON(http.StatusOK, getAllItemsResponse{Data: items})
 }
 
 func (h *Handler) getItemById(c *gin.Context) {
@@ -96,11 +90,7 @@ func (h *Handler) getItemById(c *gin.Context) {
 	}
 
 	// HTTP 200 - Successfully
-	c.JSON(http.StatusOK, map[string]interface{}{
-		"data":        item,
-		"description": "Get Item By Id",
-		"done":        true,
-	})
+	c.JSON(http.StatusOK, item)
 }
 
 func (h *Handler) updateItem(c *gin.Context) {
@@ -131,10 +121,7 @@ func (h *Handler) updateItem(c *gin.Context) {
 	}
 
 	// HTTP 200 - Successfully
-	c.JSON(http.StatusOK, map[string]interface{}{
-		"description": "Update Item",
-		"done":        true,
-	})
+	c.JSON(http.StatusOK, statusResponse{"Updated Successfully"})
 }
 
 func (h *Handler) deleteItem(c *gin.Context) {
@@ -160,8 +147,5 @@ func (h *Handler) deleteItem(c *gin.Context) {
 	}
 
 	// HTTP 200 - Successfully
-	c.JSON(http.StatusOK, map[string]interface{}{
-		"description": "Delete Item",
-		"done":        true,
-	})
+	c.JSON(http.StatusOK, statusResponse{"Deleted Successfully"})
 }

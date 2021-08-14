@@ -123,9 +123,9 @@ func TestTodoListPostgres_GetAll(t *testing.T) {
 				userId: 1,
 			},
 			want: []todo.TodoList{
-				{1, "title1", "description1", true},
-				{2, "title2", "description2", false},
-				{3, "title3", "description3", false},
+				{1, "title1", "description1"},
+				{2, "title2", "description2"},
+				{3, "title3", "description3"},
 			},
 		},
 		{
@@ -143,9 +143,9 @@ func TestTodoListPostgres_GetAll(t *testing.T) {
 				userId: 1,
 			},
 			want: []todo.TodoList{
-				{1, "title1", "description1", true},
-				{2, "title2", "description2", false},
-				{3, "title3", "description3", false},
+				{1, "title1", "description1"},
+				{2, "title2", "description2"},
+				{3, "title3", "description3"},
 			},
 		},
 	}
@@ -199,7 +199,7 @@ func TestTodoListPostgres_GetById(t *testing.T) {
 				listId: 1,
 				userId: 1,
 			},
-			want: todo.TodoList{1, "title1", "description1", true},
+			want: todo.TodoList{1, "title1", "description1"},
 		},
 		{
 			name: "Not Found",
