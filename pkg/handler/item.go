@@ -34,7 +34,7 @@ func (h *Handler) createItem(c *gin.Context) {
 	id, err := h.services.TodoItem.Create(userId, listId, input)
 	// HTTP 503 - Service is unavailable
 	if err != nil {
-		newErrorResponse(c, http.StatusServiceUnavailable, "Create Item: not done")
+		newErrorResponse(c, http.StatusServiceUnavailable, err.Error())
 		return
 	}
 
@@ -61,7 +61,7 @@ func (h *Handler) getAllItems(c *gin.Context) {
 	items, err := h.services.TodoItem.GetAll(userId, listId)
 	// HTTP 503 - Service is unavailable
 	if err != nil {
-		newErrorResponse(c, http.StatusServiceUnavailable, "Get All Items: not done")
+		newErrorResponse(c, http.StatusServiceUnavailable, err.Error())
 		return
 	}
 
@@ -85,7 +85,7 @@ func (h *Handler) getItemById(c *gin.Context) {
 	item, err := h.services.TodoItem.GetById(userId, itemId)
 	// HTTP 503 - Service is unavailable
 	if err != nil {
-		newErrorResponse(c, http.StatusServiceUnavailable, "Get Item By Id: not done")
+		newErrorResponse(c, http.StatusServiceUnavailable, err.Error())
 		return
 	}
 
@@ -116,7 +116,7 @@ func (h *Handler) updateItem(c *gin.Context) {
 
 	// HTTP 503 - Service is unavailable
 	if err := h.services.TodoItem.Update(userId, id, input); err != nil {
-		newErrorResponse(c, http.StatusServiceUnavailable, "Update Item: not done")
+		newErrorResponse(c, http.StatusServiceUnavailable, err.Error())
 		return
 	}
 
@@ -142,7 +142,7 @@ func (h *Handler) deleteItem(c *gin.Context) {
 	// HTTP 503 - Service is unavailable
 	err = h.services.TodoItem.Delete(userId, itemId)
 	if err != nil {
-		newErrorResponse(c, http.StatusServiceUnavailable, "Delete Item: not done")
+		newErrorResponse(c, http.StatusServiceUnavailable, err.Error())
 		return
 	}
 
