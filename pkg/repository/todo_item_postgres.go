@@ -97,9 +97,9 @@ func (r *TodoItemPostgres) Update(userId, itemId int, input todo.UpdateItemInput
 		argId++
 	}
 
-	if input.Done != nil {
-		setValues = append(setValues, fmt.Sprintf("done=$%d", argId))
-		args = append(args, *input.Done)
+	if input.UpdateDone != nil {
+		setValues = append(setValues, fmt.Sprintf("update_done=$%d", argId))
+		args = append(args, *input.UpdateDone)
 		argId++
 	}
 

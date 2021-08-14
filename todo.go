@@ -10,6 +10,7 @@ type TodoList struct {
 	Id          int    `json:"id" db:"id"`
 	Title       string `json:"title" db:"title" binding:"required"`
 	Description string `json:"description" db:"description"`
+	UpdateDone  bool   `json:"update_done" db:"update_done"`
 }
 
 type UserList struct {
@@ -22,7 +23,7 @@ type TodoItem struct {
 	Id          int    `json:"id" db:"id"`
 	Title       string `json:"title" db:"title" binding:"required"`
 	Description string `json:"description" db:"description"`
-	Done        bool   `json:"done" db:"done"`
+	UpdateDone  bool   `json:"update_done" db:"update_done"`
 }
 
 type ListsItem struct {
@@ -34,16 +35,17 @@ type ListsItem struct {
 type UpdateListInput struct {
 	Title       *string `json:"title"`
 	Description *string `json:"description"`
+	UpdateDone  *bool   `json:"done"`
 }
 
 type UpdateItemInput struct {
 	Title       *string `json:"title"`
 	Description *string `json:"description"`
-	Done        *bool   `json:"done"`
+	UpdateDone  *bool   `json:"done"`
 }
 
 func (i UpdateListInput) Validate() error {
-	if i.Title == nil && i.Description == nil {
+	if i.Title == nil && i.Description == nil && i.UpdateDone == nil {
 		return errors.New("update structure has no values to be updated")
 	}
 
@@ -51,7 +53,7 @@ func (i UpdateListInput) Validate() error {
 }
 
 func (i UpdateItemInput) Validate() error {
-	if i.Title == nil && i.Description == nil && i.Done == nil {
+	if i.Title == nil && i.Description == nil && i.UpdateDone == nil {
 		return errors.New("update structure has no values")
 	}
 

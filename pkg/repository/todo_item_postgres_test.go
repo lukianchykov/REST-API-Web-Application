@@ -345,7 +345,7 @@ func TestTodoItemPostgres_Update(t *testing.T) {
 				input: todo.UpdateItemInput{
 					Title:       stringPointer("new title"),
 					Description: stringPointer("new description"),
-					Done:        boolPointer(true),
+					UpdateDone:  boolPointer(true),
 				},
 			},
 		},

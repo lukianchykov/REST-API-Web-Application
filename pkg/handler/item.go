@@ -34,13 +34,15 @@ func (h *Handler) createItem(c *gin.Context) {
 	id, err := h.services.TodoItem.Create(userId, listId, input)
 	// HTTP 503 - Service is unavailable
 	if err != nil {
-		newErrorResponse(c, http.StatusServiceUnavailable, err.Error())
+		newErrorResponse(c, http.StatusServiceUnavailable, "Create Item: not done")
 		return
 	}
 
 	// HTTP 200 - Successfully
 	c.JSON(http.StatusOK, map[string]interface{}{
-		"id": id,
+		"id":          id,
+		"description": "Create Item",
+		"done":        true,
 	})
 
 }
@@ -61,12 +63,16 @@ func (h *Handler) getAllItems(c *gin.Context) {
 	items, err := h.services.TodoItem.GetAll(userId, listId)
 	// HTTP 503 - Service is unavailable
 	if err != nil {
-		newErrorResponse(c, http.StatusServiceUnavailable, err.Error())
+		newErrorResponse(c, http.StatusServiceUnavailable, "Get All Items: not done")
 		return
 	}
 
 	// HTTP 200 - Successfully
-	c.JSON(http.StatusOK, items)
+	c.JSON(http.StatusOK, map[string]interface{}{
+		"data":        items,
+		"description": "Get All Items",
+		"done":        true,
+	})
 }
 
 func (h *Handler) getItemById(c *gin.Context) {
@@ -85,12 +91,16 @@ func (h *Handler) getItemById(c *gin.Context) {
 	item, err := h.services.TodoItem.GetById(userId, itemId)
 	// HTTP 503 - Service is unavailable
 	if err != nil {
-		newErrorResponse(c, http.StatusServiceUnavailable, err.Error())
+		newErrorResponse(c, http.StatusServiceUnavailable, "Get Item By Id: not done")
 		return
 	}
 
 	// HTTP 200 - Successfully
-	c.JSON(http.StatusOK, item)
+	c.JSON(http.StatusOK, map[string]interface{}{
+		"data":        item,
+		"description": "Get Item By Id",
+		"done":        true,
+	})
 }
 
 func (h *Handler) updateItem(c *gin.Context) {
@@ -116,12 +126,15 @@ func (h *Handler) updateItem(c *gin.Context) {
 
 	// HTTP 503 - Service is unavailable
 	if err := h.services.TodoItem.Update(userId, id, input); err != nil {
-		newErrorResponse(c, http.StatusServiceUnavailable, err.Error())
+		newErrorResponse(c, http.StatusServiceUnavailable, "Update Item: not done")
 		return
 	}
 
 	// HTTP 200 - Successfully
-	c.JSON(http.StatusOK, statusResponse{"ok"})
+	c.JSON(http.StatusOK, map[string]interface{}{
+		"description": "Update Item",
+		"done":        true,
+	})
 }
 
 func (h *Handler) deleteItem(c *gin.Context) {
@@ -142,10 +155,13 @@ func (h *Handler) deleteItem(c *gin.Context) {
 	// HTTP 503 - Service is unavailable
 	err = h.services.TodoItem.Delete(userId, itemId)
 	if err != nil {
-		newErrorResponse(c, http.StatusServiceUnavailable, err.Error())
+		newErrorResponse(c, http.StatusServiceUnavailable, "Delete Item: not done")
 		return
 	}
 
 	// HTTP 200 - Successfully
-	c.JSON(http.StatusOK, statusResponse{"ok"})
+	c.JSON(http.StatusOK, map[string]interface{}{
+		"description": "Delete Item",
+		"done":        true,
+	})
 }

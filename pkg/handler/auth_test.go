@@ -2,8 +2,8 @@ package handler
 
 import (
 	todo "WebApplication"
+	mock_service "WebApplication/mocks"
 	"WebApplication/pkg/service"
-	service_mocks "WebApplication/pkg/service/mocks"
 	"bytes"
 	"errors"
 	"github.com/gin-gonic/gin"
@@ -15,7 +15,7 @@ import (
 
 func TestHandler_signUp(t *testing.T) {
 	// Init Test Table
-	type mockBehavior func(r *service_mocks.MockAuthorization, user todo.User)
+	type mockBehavior func(r *mock_service.MockAuthorization, user todo.User)
 
 	tests := []struct {
 		name                 string
@@ -33,7 +33,7 @@ func TestHandler_signUp(t *testing.T) {
 				Name:     "Test Name",
 				Password: "qwerty",
 			},
-			mockBehavior: func(r *service_mocks.MockAuthorization, user todo.User) {
+			mockBehavior: func(r *mock_service.MockAuthorization, user todo.User) {
 				r.EXPECT().CreateUser(user).Return(1, nil)
 			},
 			expectedStatusCode:   201,
@@ -43,7 +43,7 @@ func TestHandler_signUp(t *testing.T) {
 			name:                 "Wrong Input",
 			inputBody:            `{"username": "username"}`,
 			inputUser:            todo.User{},
-			mockBehavior:         func(r *service_mocks.MockAuthorization, user todo.User) {},
+			mockBehavior:         func(r *mock_service.MockAuthorization, user todo.User) {},
 			expectedStatusCode:   400,
 			expectedResponseBody: `{"message":"invalid input body"}`,
 		},
@@ -55,7 +55,7 @@ func TestHandler_signUp(t *testing.T) {
 				Name:     "Test Name",
 				Password: "qwerty",
 			},
-			mockBehavior: func(r *service_mocks.MockAuthorization, user todo.User) {
+			mockBehavior: func(r *mock_service.MockAuthorization, user todo.User) {
 				r.EXPECT().CreateUser(user).Return(0, errors.New("something went wrong"))
 			},
 			expectedStatusCode:   503,
@@ -69,7 +69,7 @@ func TestHandler_signUp(t *testing.T) {
 			c := gomock.NewController(t)
 			defer c.Finish()
 
-			repo := service_mocks.NewMockAuthorization(c)
+			repo := mock_service.NewMockAuthorization(c)
 			test.mockBehavior(repo, test.inputUser)
 
 			services := &service.Service{Authorization: repo}
