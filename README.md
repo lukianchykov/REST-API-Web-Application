@@ -80,3 +80,4 @@ migrate -path ./schema -database 'mandarin4ek/webapp:postgresv1.0://postgres:roo
 ![](images/Postman9.png)
 ![](images/Postman10.png)
 ![](images/Postman11.png)
+![](images/Postman12.png)
