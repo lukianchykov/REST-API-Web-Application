@@ -35,13 +35,13 @@ type ListsItem struct {
 type UpdateListInput struct {
 	Title       *string `json:"title"`
 	Description *string `json:"description"`
-	UpdateDone  *bool   `json:"done"`
+	UpdateDone  *bool   `json:"update_done"`
 }
 
 type UpdateItemInput struct {
 	Title       *string `json:"title"`
 	Description *string `json:"description"`
-	UpdateDone  *bool   `json:"done"`
+	UpdateDone  *bool   `json:"update_done"`
 }
 
 func (i UpdateListInput) Validate() error {
