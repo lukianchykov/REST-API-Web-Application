@@ -28,6 +28,15 @@
 - <a href="https://www.postman.com/downloads/">Postman</a>
 - <a href="https://www.docker.com/products/docker-desktop">Docker</a>
 
+### Fix `go.sum`:
+1) ![](images/gomod.png)
+2) ![](images/gomod2.png)
+3) ![](images/gomod3.png)
+
+### Fix format file `wait-for-postgres.sh` for unix systems:
+1) ![](images/selectfile.png)
+2) ![](images/wait-for-postgresUnix.png)
+
 ### Configure `Terminal` to `Project Location`:
 ```
 Set-Location -Path E:\GoLangProjects\WebApplication
@@ -47,7 +56,7 @@ docker-compose up web-app
 ### Docker Desktop:
 ![](images/Docker1.png)
 ![](images/Docker2.png)
-## В случаи пустой базы данных или первого запуска, необходимо сделать миграцию:
+## В случаи пустой базы данных или первого запуска, необходимо сделать миграцию в другом `terminal`, где не запущено приложение:
 ```
 migrate -path ./schema -database 'mandarin4ek/webapp:postgresv1.0://postgres:rootdocker@localhost:5436/postgres?sslmode=disable' up
 migrate -path ./schema -database 'mandarin4ek/webapp:postgresv1.0://postgres:rootdocker@localhost:5436/postgres?sslmode=disable' down
@@ -69,3 +78,5 @@ migrate -path ./schema -database 'mandarin4ek/webapp:postgresv1.0://postgres:roo
 ![](images/Postman7.png)
 ![](images/Postman8.png)
 ![](images/Postman9.png)
+![](images/Postman10.png)
+![](images/Postman11.png)
