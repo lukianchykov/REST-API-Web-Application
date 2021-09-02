@@ -45,21 +45,28 @@ Set-Location -Path E:\GoLangProjects\WebApplication
 ![](images/PowerShellConfig.png)
 ### Goland:
 ![](images/GolandConfig.png)
+### Modify Configuration
+1) Add domains and email addresses to init-letsencrypt.sh
+2) Replace all occurrences of example.org with primary domain (the first one you added to init-letsencrypt.sh) in data/nginx/app.conf
+### Run Script
+```
+./init-letsencrypt.sh
+```
 ## Для запуска приложения:
 ```
-docker-compose up web-app
+docker-compose up
 ```
 ### PowerShell:
 ![](images/PowerShell.png)
 ### Goland Terminal:
 ![](images/Goland.png)
 ### Docker Desktop:
-![](images/Docker1.png)
-![](images/Docker2.png)
+![](images/Docker.png)
+![](images/DockerStart.png)
 ## В случаи пустой базы данных или первого запуска, необходимо сделать миграцию в другом `terminal`, где не запущено приложение:
 ```
-migrate -path ./schema -database 'mandarin4ek/webapp:postgresv1.0://postgres:rootdocker@localhost:5436/postgres?sslmode=disable' up
-migrate -path ./schema -database 'mandarin4ek/webapp:postgresv1.0://postgres:rootdocker@localhost:5436/postgres?sslmode=disable' down
+migrate -path ./schema -database 'postgres://postgres:qwerty@localhost:5436/postgres?sslmode=disable' up
+migrate -path ./schema -database 'postgres://postgres:qwerty@localhost:5436/postgres?sslmode=disable' down
 ```
 
 ### PowerShell:
